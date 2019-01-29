@@ -3,9 +3,9 @@ module Base
     format :json
     prefix :api
 
-    mount Ad::API
-    mount Brand::API
-    mount Type::API
-    mount User::API
+    mount AdvertController::API
+    mount BrandController::API
+    mount ModelController::API
+    mount UserController::API
   end
 end

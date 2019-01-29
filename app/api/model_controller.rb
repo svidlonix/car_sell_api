@@ -1,4 +1,4 @@
-module Type
+module ModelController
   class API < Grape::API
     resource :types do
       desc 'Return types.'

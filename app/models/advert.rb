@@ -1,6 +1,6 @@
 class Advert
   include Mongoid::Document
-  include Mongoid::Enum
+  include MongoidEnumerable
 
   field :engine, type: String
   field :conditioner, type: Boolean
@@ -13,8 +13,8 @@ class Advert
   belongs_to :model
   belongs_to :user
 
-  enum :wheel, [:left, :right]
-  enum :type, [:car, :bikes, :trucks]
-  enum :fuel, [:diesel, :petrol]
-  enum :transmission, [:manual, :automatic]
+  enumerable :wheel, [:left, :right]
+  enumerable :type, [:car, :bikes, :trucks]
+  enumerable :fuel, [:diesel, :petrol]
+  enumerable :transmission, [:manual, :automatic]
 end

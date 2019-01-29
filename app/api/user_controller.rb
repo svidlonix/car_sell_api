@@ -1,4 +1,4 @@
-module User
+module UserController
   class API < Grape::API
     resource :users do
       desc 'Return users.'
