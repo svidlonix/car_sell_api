@@ -1,4 +1,4 @@
-module Brand
+module BrandController
   class API < Grape::API
     resource :brands do
       desc 'Return brands.'

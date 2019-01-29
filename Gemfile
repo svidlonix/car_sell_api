@@ -40,8 +40,8 @@ gem 'grape'
 
 gem 'mongoid'
 gem 'bson_ext'
-gem "mongoid-enum"
-gem "devise"
+gem 'devise'
+gem 'mongoid_enumerable'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,4 +1,4 @@
-module Ad
+module AdvertController
   class API < Grape::API
     resource :cars do
       desc 'Return cars.'
