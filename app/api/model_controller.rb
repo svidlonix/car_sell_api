@@ -1,18 +1,18 @@
 module ModelController
   class API < Grape::API
-    resource :types do
-      desc 'Return types.'
+    resource :models do
+      desc 'Return models.'
       get do
-        [{ id: 1, name: 'Cars' }, { id: 2, name: 'Bikes' }, { id: 3, name: 'Trucks'}]
+        Model.all
       end
 
-      desc 'Return type.'
+      desc 'Return model.'
       params do
-        requires :id, type: Integer
+        requires :id
       end
       route_param :id do
         get do
-          { id: 1, name: 'Cars' }
+          Model.find_by(id: params['id'])
         end
       end
     end

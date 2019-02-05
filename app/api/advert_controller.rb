@@ -3,16 +3,16 @@ module AdvertController
     resource :cars do
       desc 'Return cars.'
       get do
-        [{ id: 1, brand: 'Audi', model: 'A4', year: '2008' }, { id: 2, name: 'Audi', brand: 'A6', year: '2008' }, { id: 3, name: 'Audi', brand: 'A8', year: '2008' }]
+        Advert.all
       end
 
       desc 'Return car.'
       params do
-        requires :id, type: Integer
+        requires :id
       end
       route_param :id do
         get do
-          { id: 1, brand: 'Audi', model: 'A4', year: '2008' }
+          Advert.find_by(id: params['id'])
         end
       end
     end

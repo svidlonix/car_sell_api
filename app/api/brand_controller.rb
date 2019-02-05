@@ -3,16 +3,16 @@ module BrandController
     resource :brands do
       desc 'Return brands.'
       get do
-        [{ id: 1, name: 'Audi' }, { id: 2, name: 'Ford' }, { id: 3, name: 'Skoda' }]
+        Brand.all
       end
 
       desc 'Return brand.'
       params do
-        requires :id, type: Integer
+        requires :id
       end
       route_param :id do
         get do
-          { id: 1, name: 'Audi' }
+          Brand.find_by(id: params['id'])
         end
       end
     end
