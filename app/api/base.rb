@@ -10,9 +10,8 @@ module Base
     helpers do
       def authenticated
         return unless request.headers['Authorization'].present?
-        decoded_token = JWT.decode(request.headers['Authorization'], Devise.secret_key, true, { algorithm: 'HS256' }).first['jti']
+        decoded_token = JWT.decode(request.headers['Authorization'], ENV['SECRET_KEY_BASE'], true, { algorithm: 'HS256' }).first['jti']
         @user = User.find_by(jti: decoded_token)
-      rescue Exception
       end
 
       def current_user
