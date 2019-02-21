@@ -11,7 +11,9 @@ Rails.application.routes.draw do
         sessions: 'sessions',
         registrations: 'registrations'
       }
-    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   mount Base::API => '/'
+
+  root 'home#index'
 end

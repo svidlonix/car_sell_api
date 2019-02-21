@@ -1,6 +1,7 @@
 class Advert
   include Mongoid::Document
   include MongoidEnumerable
+  include Mongoid::Paperclip
 
   field :engine, type: String
   field :conditioner, type: Boolean
@@ -17,4 +18,18 @@ class Advert
   enumerable :type, [:car, :bikes, :trucks]
   enumerable :fuel, [:diesel, :petrol]
   enumerable :transmission, [:manual, :automatic]
+
+  embeds_many :pictures
+
+  def model_name
+    model.name
+  end
+
+  def brand_name
+    model.brand.name
+  end
+
+  def main_picture_base64
+    Base64.encode64(File.read(pictures.first.image.path(:medium)))
+  end
 end

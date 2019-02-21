@@ -42,7 +42,10 @@ gem 'bson_ext'
 gem 'mongoid_enumerable'
 gem 'devise-jwt'
 gem 'jwt'
-gem "dotenv-rails"
+gem 'dotenv-rails'
+gem 'rack-cors'
+gem 'paperclip'
+gem 'mongoid-paperclip'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
