@@ -2,8 +2,11 @@ module AdvertController
   class API < Grape::API
     resource :cars do
       desc 'Return cars.'
+      params do
+        requires :limit
+      end
       get do
-        Advert.all
+        Array(Advert.all.limit(params['limit']).as_json(only: [:price, :engine, :type], methods:[:model_name, :brand_name, :main_picture_base64]))
       end
 
       desc 'Return car.'

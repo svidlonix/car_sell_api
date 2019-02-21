@@ -4,8 +4,12 @@ class SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})
-    token = JWT.encode(resource.jwt_payload, ENV['SECRET_KEY_BASE'], 'HS256')
-    render json: { 'token' => token }
+    if resource.jti.present?
+      token = JWT.encode(resource.jwt_payload, ENV['SECRET_KEY_BASE'], 'HS256')
+      render json: { 'token' => token }
+    else
+      render status: :unauthorized
+    end
   end
 
   def respond_to_on_destroy
