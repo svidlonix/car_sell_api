@@ -2,6 +2,7 @@ class Advert
   include Mongoid::Document
   include MongoidEnumerable
   include Mongoid::Paperclip
+  include Mongoid::Timestamps
 
   field :engine, type: String
   field :conditioner, type: Boolean
@@ -31,5 +32,9 @@ class Advert
 
   def main_picture_base64
     Base64.encode64(File.read(pictures.first.image.path(:medium)))
+  end
+
+  def created_date
+    created_at.strftime("%m/%d/%Y")
   end
 end

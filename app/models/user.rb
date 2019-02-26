@@ -2,6 +2,8 @@ class User
   include Mongoid::Document
   include MongoidEnumerable
   include Devise::JWT::RevocationStrategies::JTIMatcher
+  include Mongoid::Timestamps
+  include Mongoid::Paperclip
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -26,6 +28,14 @@ class User
   has_many :adverts
 
   index({ jti: 1 }, { unique: true, name: "jti_index" })
+
+  has_mongoid_attached_file :avatar,
+  path: ':rails_root/public/system/:attachment/:id/:style/:filename',
+  url: '/system/:attachment/:id/:style/:filename',
+  styles: { small: '200x200>', medium: '400x300>' }
+
+  validates_attachment_content_type :avatar, content_type: %w(image/jpeg image/jpg image/png)
+
   ## Trackable
   # field :sign_in_count,      type: Integer, default: 0
   # field :current_sign_in_at, type: Time
