@@ -1,6 +1,7 @@
 class Picture
   include Mongoid::Document
   include Mongoid::Paperclip
+  include Mongoid::Timestamps
 
   embedded_in :advert, inverse_of: :pictures
 
