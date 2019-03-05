@@ -5,7 +5,7 @@ module ProfileController
 
       desc 'Return profile.'
       get do
-        current_user
+        current_user.as_json(only: [:email, :first_name, :last_name], methods: [:avatar_decode])
       end
     end
 
@@ -19,12 +19,15 @@ module ProfileController
         requires :last_name, type: String
         requires :password, type: String
         requires :confirm_password, type: String
+        requires :avatar_decode, type: String
       end
       post do
+        avatar = params[:avatar_decode].present? ? BSON::Binary.new(params[:avatar_decode], :md5) : current_user.avatar
         current_user.update(
           email: params[:email],
           first_name: params[:first_name],
-          last_name: params[:last_name]
+          last_name: params[:last_name],
+          avatar: avatar
         )
       end
     end

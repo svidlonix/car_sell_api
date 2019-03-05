@@ -15,6 +15,7 @@ class User
   field :first_name, type: String, default: ""
   field :last_name, type: String, default: ""
   field :jti, type: String
+  field :avatar, type: BSON::Binary
 
   ## Recoverable
   field :reset_password_token,   type: String
@@ -28,13 +29,6 @@ class User
   has_many :adverts
 
   index({ jti: 1 }, { unique: true, name: "jti_index" })
-
-  has_mongoid_attached_file :avatar,
-  path: ':rails_root/public/system/:attachment/:id/:style/:filename',
-  url: '/system/:attachment/:id/:style/:filename',
-  styles: { small: '200x200>', medium: '400x300>' }
-
-  validates_attachment_content_type :avatar, content_type: %w(image/jpeg image/jpg image/png)
 
   ## Trackable
   # field :sign_in_count,      type: Integer, default: 0
@@ -56,5 +50,9 @@ class User
 
   def will_save_change_to_email?
     false
+  end
+
+  def avatar_decode
+    avatar&.data
   end
 end
