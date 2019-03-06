@@ -11,13 +11,15 @@ class Advert
   field :distance_covered, type: String
   field :year, type: String
   field :color, type: String
+  field :description, type: String
+  field :picture, type: String
 
   belongs_to :model
   belongs_to :user
 
   enumerable :wheel, [:left, :right]
-  enumerable :type, [:car, :bikes, :trucks]
-  enumerable :fuel, [:diesel, :petrol]
+  enumerable :type, [:car, :bike, :truck]
+  enumerable :fuel, [:diesel, :petrol, :hybrid, :electro]
   enumerable :transmission, [:manual, :automatic]
 
   embeds_many :pictures
@@ -28,10 +30,6 @@ class Advert
 
   def brand_name
     model.brand.name
-  end
-
-  def main_picture_base64
-    Base64.encode64(File.read(pictures.first.image.path(:medium)))
   end
 
   def created_date

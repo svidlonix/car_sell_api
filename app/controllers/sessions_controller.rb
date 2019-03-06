@@ -6,7 +6,7 @@ class SessionsController < Devise::SessionsController
   def respond_with(resource, _opts = {})
     if resource.jti.present?
       token = JWT.encode(resource.jwt_payload, ENV['SECRET_KEY_BASE'], 'HS256')
-      render json: { 'token' => token, 'user_id' => resource.id.to_s }
+      render json: { 'token' => token, 'avatar' => resource.avatar&.data }
     else
       render status: :unauthorized
     end
